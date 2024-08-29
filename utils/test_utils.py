@@ -7,7 +7,7 @@ from PIL import Image
 import logging
 
 
-def validate(val_loader, model, criterion, print_freq=10, device='cuda:0'):
+def validate(val_loader, model, criterion, print_freq=10, device="cuda:0"):
     batch_time = AverageMeter()
     losses = AverageMeter()
     top1 = AverageMeter()
@@ -35,21 +35,26 @@ def validate(val_loader, model, criterion, print_freq=10, device='cuda:0'):
         end = time.time()
 
         if i % print_freq == 0:
-            logging.info('Test: [{0}/{1}]\t'
-                         'Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t'
-                         'Loss {loss.val:.4f} ({loss.avg:.4f})\t'
-                         'Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t'
-                         'Prec@5 {top5.val:.3f} ({top5.avg:.3f})'.format(
-                             i,
-                             len(val_loader),
-                             batch_time=batch_time,
-                             loss=losses,
-                             top1=top1,
-                             top5=top5,
-                         ))
+            logging.info(
+                "Test: [{0}/{1}]\t"
+                "Time {batch_time.val:.3f} ({batch_time.avg:.3f})\t"
+                "Loss {loss.val:.4f} ({loss.avg:.4f})\t"
+                "Prec@1 {top1.val:.3f} ({top1.avg:.3f})\t"
+                "Prec@5 {top5.val:.3f} ({top5.avg:.3f})".format(
+                    i,
+                    len(val_loader),
+                    batch_time=batch_time,
+                    loss=losses,
+                    top1=top1,
+                    top5=top5,
+                )
+            )
     val_end_time = time.time()
-    logging.info(' * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f} Loss {losses.avg:.3f} Time {time:.3f}'.
-                 format(top1=top1, top5=top5, time=val_end_time - val_start_time, losses=losses))
+    logging.info(
+        " * Prec@1 {top1.avg:.3f} Prec@5 {top5.avg:.3f} Loss {losses.avg:.3f} Time {time:.3f}".format(
+            top1=top1, top5=top5, time=val_end_time - val_start_time, losses=losses
+        )
+    )
 
     return losses.avg, top1.avg, top5.avg
 
@@ -73,7 +78,7 @@ class AverageMeter(object):
         self.avg = self.sum / self.count
 
 
-def accuracy(output, target, topk=(1, )):
+def accuracy(output, target, topk=(1,)):
     """Computes the precision@k for the specified values of k"""
     maxk = max(topk)
     batch_size = target.size(0)

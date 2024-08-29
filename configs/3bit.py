@@ -1,4 +1,3 @@
-
 class Config:
     def __init__(self):
         # calibration settings
@@ -12,8 +11,8 @@ class Config:
         self.qconv_a_bit = 8
         self.qhead_a_bit = 3
         self.matmul_head_channel_wise = True
-        self.post_softmax_quantizer = 'adalog'
-        self.post_gelu_quantizer = 'adalog'
+        self.post_softmax_quantizer = "adalog"
+        self.post_gelu_quantizer = "adalog"
         # search settings
         self.eq_n = 128
         self.search_round = 3
